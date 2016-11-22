@@ -5,8 +5,7 @@ var mongoose = require('mongoose');
     var stripeToken = req.body.stripeToken;
 
     if(!stripeToken){
-        return res.send( { msg: 'Please provide a valid card.' });
-
+        return res.send( { success: false, msg: 'Please provide a valid card.' });
     }
 
     User.findById(req.user.id, function(err, user) {
@@ -15,12 +14,12 @@ var mongoose = require('mongoose');
         user.setCard(stripeToken, function (err) {
             if (err) {
                 if(err.code && err.code == 'card_declined'){
-                    return res.send( { msg: 'Your card was declined. Please provide a valid card.' });
+                    return res.send( { success: false, msg: 'Your card was declined. Please provide a valid card.' });
                 }
-                return res.send( { msg: 'An unexpected error occurred.' });
-
+                console.log(err);
+                return res.send( { success: false, msg: 'An unexpected error occurred.' });
             }
-            return res.send( { msg: 'Billing has been updated.' });
+            return res.send( { success:true, msg: 'Billing has been updated.' });
 
         });
     });
@@ -36,7 +35,7 @@ exports.postPlan = function(req, res, next){
     }
 
     if(req.user.stripe.plan == plan){
-        return res.send( {msg: 'The selected plan is the same as the current plan.'});
+        return res.send( {success: false, msg: 'The selected plan is the same as the current plan.'});
     }
 
     if(req.body.stripeToken){
@@ -44,7 +43,7 @@ exports.postPlan = function(req, res, next){
     }
 
     if(!req.user.stripe.last4 && !req.body.stripeToken){
-        return res.send( {msg: 'Please add a card to your account before choosing a plan.'});
+        return res.send( {success:false, msg: 'Please add a card to your account before choosing a plan.'});
     }
 
     User.findById(req.user.id, function(err, user) {
@@ -62,9 +61,9 @@ exports.postPlan = function(req, res, next){
                     msg = 'An unexpected error occurred.';
                 }
 
-                return res.send( { msg:  msg});
+                return res.send( { success:false, msg:  msg});
             }
-            return res.send( { msg: 'Plan has been updated.' });
+            return res.send( { success:true, msg: 'Plan has been updated.' });
         });
     });
 };
@@ -73,12 +72,11 @@ exports.cancelPlan = function(req, res, next){
     var User = mongoose.model("User");
     User.findById(req.user.id, function(err, user) {
         if (err) {
-            res.send(err);
-            return;
+            return; res.send(err);
         }
 
         user.cancelStripe(function(err){
-            res.send(err || { msg: 'Your account has been deleted.' });
+            res.send(err || { success:true, msg: 'Your subscription has been cancelled.' });
         });
 
     });
