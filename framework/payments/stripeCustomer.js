@@ -141,8 +141,12 @@ module.exports = function stripeCustomer (schema, options) {
                     cb(err);
                 })
             }, function(err) {
-                return cb(err);
+                user.stripe = {};
+                user.save(function(err2, user){
+                    cb(err);
+                })
             });
+
         } else {
             cb();
         }
