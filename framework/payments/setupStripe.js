@@ -68,3 +68,18 @@ exports.postPlan = function(req, res, next){
         });
     });
 };
+
+exports.cancelPlan = function(req, res, next){
+    var User = mongoose.model("User");
+    User.findById(req.user.id, function(err, user) {
+        if (err) {
+            res.send(err);
+            return;
+        }
+
+        user.cancelStripe(function(err){
+            res.send(err || { msg: 'Your account has been deleted.' });
+        });
+
+    });
+};

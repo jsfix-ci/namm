@@ -12,4 +12,5 @@ module.exports = function setupStripeRoutes(namm){
 
     app.post('/billing/updateBilling', isAuthenticated, setupStripe.postBilling);
     app.post('/billing/updatePlan', isAuthenticated, setupStripe.postPlan);
+    app.post('/billing/cancelPlan', isAuthenticated, setupStripe.cancelPlan);
 }
