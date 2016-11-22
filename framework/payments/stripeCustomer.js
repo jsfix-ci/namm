@@ -134,13 +134,15 @@ module.exports = function stripeCustomer (schema, options) {
         var user = this;
 
         if(user.stripe.customerId){
-            stripe.customers.del(
-                    user.stripe.customerId
-                ).then(function(confirmation) {
-                    cb();
-                }, function(err) {
-                    return cb(err);
-                });
+
+            stripe.customers.del(user.stripe.customerId).then(function(confirmation) {
+                user.stripe = {};
+                user.save(function(err, user){
+                    cb(err);
+                })
+            }, function(err) {
+                return cb(err);
+            });
         } else {
             cb();
         }
