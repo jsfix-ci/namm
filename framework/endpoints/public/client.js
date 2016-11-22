@@ -561,7 +561,7 @@
       }
 
       //DATA ACTIONS
-      $scope.create = function(data) {
+      $scope.create = function(data, cb) {
 
         var item = data || $scope.item;
 
@@ -584,6 +584,9 @@
               //window.setTimeout(function() {
                 $window.location.href = '/' + modelName + 's/';
               //}, 3000);
+            }
+            if(cb){
+                cb(response.data);
             }
             $scope.reset();
             if ($scope._listed) {
