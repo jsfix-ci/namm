@@ -136,12 +136,14 @@ module.exports = function stripeCustomer (schema, options) {
         if(user.stripe.customerId){
 
             stripe.customers.del(user.stripe.customerId).then(function(confirmation) {
-                user.stripe = {};
+                user.stripe.customerId = null;
+                user.stripe.last4 = null;
                 user.save(function(err, user){
                     cb(err);
                 })
             }, function(err) {
-                user.stripe = {};
+                user.stripe.customerId = null;
+                user.stripe.last4 = null;
                 user.save(function(err2, user){
                     cb(err);
                 })
