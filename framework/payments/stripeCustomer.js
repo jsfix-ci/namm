@@ -138,7 +138,7 @@ module.exports = function stripeCustomer (schema, options) {
             var clearUserPlan = function(cb){
                 user.stripe.customerId = null;
                 user.stripe.last4 = null;
-                user.stripe.plan = null;
+                user.stripe.plan = "free";
                 user.save(function(err, user){
                     cb(err);
                 })

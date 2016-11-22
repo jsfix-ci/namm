@@ -1,6 +1,6 @@
 {
   "name": "namm",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "node angular mongo module spa framework",
   "main": "index.js",
   "dependencies": {
