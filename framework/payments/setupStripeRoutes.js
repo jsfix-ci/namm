@@ -6,9 +6,10 @@ module.exports = function setupStripeRoutes(namm){
     var isAuthenticated = namm.isAuthenticated;
 
     var userSchema = mongoose.model('User');
-    var stripeCustomer = require('./framework/payments//stripeCustomer');
+    var stripeCustomer = require('./stripeCustomer');
     userSchema.plugin(stripeCustomer, stripeOptions);
-    var setupStripe = require('./framework/payments/setupStripe');
+    var setupStripe = require('./setupStripe');
+
     app.post('/billing/updateBilling', isAuthenticated, setupStripe.postBilling);
     app.post('/billing/updatePlan', isAuthenticated, setupStripe.postPlan);
 }
