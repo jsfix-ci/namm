@@ -134,11 +134,12 @@ function init(models) {
     connectToDatabase();
 
     setupUserModel(resources.User);
-    setupAuthentication(app, config);
 
     if(exports.stripeOptions){
         require("./framework/payments/setupStripeRoutes")(exports);
     }
+
+    setupAuthentication(app, config);
 
     setupModels();
     setupModelsEndpoints();
