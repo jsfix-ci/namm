@@ -133,7 +133,7 @@ function init(models) {
 
     connectToDatabase();
 
-    setupUserModel(resources.User);
+    setupUserModel(resources.User, exports.stripeOptions);
     setupAuthentication(app, config);
 
     if(exports.stripeOptions){

@@ -12,7 +12,7 @@ Schema = mongoose.Schema;
 
 var homePages = null;
 
-function setupUserModel(userModel){
+function setupUserModel(userModel, stripeOptions){
 
     homePages = userModel.$home;
 
@@ -55,7 +55,14 @@ function setupUserModel(userModel){
 
     userProps = _.extend(userProps, clone);
 
-    mongoose.model('User', new Schema(userProps));
+    var userSchema = new Schema(userProps);
+
+    if(stripeOptions){
+        var stripeCustomer = require('../payments/stripeCustomer');
+        userSchema.plugin(stripeCustomer, stripeOptions);
+    }
+
+    mongoose.model('User', userSchema);
 }
 
 var mailgun = null;
