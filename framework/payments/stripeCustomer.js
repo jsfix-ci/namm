@@ -135,18 +135,19 @@ module.exports = function stripeCustomer (schema, options) {
 
         if(user.stripe.customerId){
 
-            stripe.customers.del(user.stripe.customerId).then(function(confirmation) {
+            var clearUserPlan = function(cb){
                 user.stripe.customerId = null;
                 user.stripe.last4 = null;
+                user.stripe.plan = null;
                 user.save(function(err, user){
                     cb(err);
                 })
+            }
+
+            stripe.customers.del(user.stripe.customerId).then(function(confirmation) {
+                clearUserPlan(cb);
             }, function(err) {
-                user.stripe.customerId = null;
-                user.stripe.last4 = null;
-                user.save(function(err2, user){
-                    cb(err);
-                })
+                clearUserPlan(cb);
             });
 
         } else {
