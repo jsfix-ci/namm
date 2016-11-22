@@ -5,7 +5,7 @@ module.exports = function setupStripeRoutes(namm){
     var stripeOptions = namm.stripeOptions;
     var isAuthenticated = namm.isAuthenticated;
 
-    var userSchema = mongoose.model('User');
+    var userSchema = mongoose.model('User').schema;
     var stripeCustomer = require('./stripeCustomer');
     userSchema.plugin(stripeCustomer, stripeOptions);
     var setupStripe = require('./setupStripe');
