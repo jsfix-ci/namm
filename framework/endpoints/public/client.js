@@ -785,6 +785,15 @@
         }).then(
           function(response) {
             console.log(response.data);
+            var pageCount =  response.data.length ? response.data[0].$count / pageSize : 0;
+            if(pageCount != 0){
+                if(Math.floor(pageCount) == pageCount){
+                    pageCount-=1;
+                }else{
+                    pageCount = Math.floor(pageCount);
+                }
+            }
+
             if (target) {
               if ($scope[target]) {
                 $scope[target].splice(0, $scope[target].length);
@@ -792,7 +801,7 @@
               } else {
                 $scope[target] = response.data;
               }
-              $scope[target].pageCount = response.data.length ? Math.floor(response.data[0].$count / pageSize) : 0;
+              $scope[target].pageCount = pageCount;
               $scope[target].totalCount = response.data.length ? response.data[0].$count : 0;
               $scope[target].pageSize = pageSize;
               $scope[target].sourceModel = sourceModel;
@@ -802,7 +811,7 @@
             } else {
               $scope.items = response.data;
               $scope[modelName.toLowerCase() + 's'] = response.data;
-              $scope.items.pageCount = response.data.length ? Math.floor(response.data[0].$count / pageSize) : 0;
+              $scope.items.pageCount = pageCount;
               $scope.items.totalCount = response.data.length ? response.data[0].$count : 0;
               $scope.items.pageSize = pageSize;
               $scope.items.sourceModel = sourceModel;
