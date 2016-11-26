@@ -7,7 +7,7 @@ module.exports = function(namm){
 
         //send layout file for the SPA
         var index = function(req, res) {
-            res.sendFile(namm.layoutPath || (__dirname + '/templates/base.html'));
+            res.sendFile(namm.layoutPath || (__dirname + '/public/base.html'));
         };
 
         //view routes (in case the user refreshers the browser)
