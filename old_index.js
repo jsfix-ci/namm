@@ -104,7 +104,7 @@ function setupEndpoints(modelName, modelProperties) {
 
   var index = function(req, res) {
     //var file = config.clientside_framework == "react" ? "base_react.html" : "base.html";
-    res.sendFile(layoutPath); //path.join(__dirname, '/public/' + file)
+    res.sendFile(layoutPath || (__dirname + '/templates/base.html')); //path.join(__dirname, '/public/' + file)
   };
 
   //view routes

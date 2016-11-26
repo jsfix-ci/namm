@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NammApp">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="author">
+
+    <title ng-bind="$root._shared.title || 'Application'"></title>
+
+    <link href="/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/components/bootstrap-additions/dist/modules/aside.css" rel="stylesheet">
+    <link href="/components/angular-motion/dist/angular-motion.min.css" rel="stylesheet">
+    <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/components/textAngular/dist/textAngular.css" rel="stylesheet">
+    <link href="/components/ladda/dist/ladda-themeless.min.css" rel="stylesheet">
+
+    <link href="/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <script src="/_models.js"></script>
+    <script src="/_services.js"></script>
+
+    <script type="text/javascript" src="/sockjs.js"></script>
+
+  </head>
+  <body ng-controller="MainController">
+      <div class="container-fluid" style="margin-top: 1em; margin-bottom:3em;">
+        <div class="row">
+          <!-- LEFT COLUMN -->
+          <div class="col-xs-12 col-sm-3 col-lg-2" ng-if="$root._user">
+            <img src="/img/logo.png" style="width:55px; margin-bottom:4em;">
+            <!--<div class="form-group" style="margin:3em 0;">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search...">
+                  <span class="input-group-addon" style="background-color: #FFF;">
+                    <span class="glyphicon glyphicon-search"></span>
+                  </span>
+                </div>
+              </div>-->
+            <ul class="nav nav-pills nav-stacked ng-cloak" ng-cloak ng-if="$root._user">
+              <!--li style='min-width: 175px;'>
+                <span style="padding:0 15px; text-transform: uppercase;">Menu</span>
+              </li-->
+              <li ng-repeat="(text,link) in $root._shared.menu" data-match-route="{{link}}*">
+                <a href="{{link}}">{{text}}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-12 visible-xs-block" style="height:0.5em;"></div>
+          <!-- RIGHT COLUMN -->
+          <div class="col-xs-12" ng-class="'col-sm-9 col-lg-10'">
+            <div class="row">
+              <div class="col-xs-12 col-sm-8">
+                <span class="text-uppercase" ng-bind="controllerdescription" style="font-size:.9em; color:#AAA; letter-spacing: 1px; float:left;"></span><br>
+                <h1 style="font-weight:200; font-size: 2.3em; margin-top:0;">
+                  <i class="fa" ng-class="controllericon" style="margin-right:7px;"></i>
+                  <span ng-bind="controllerheader"></span>
+                </h1>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                  <button aria-expanded="false" aria-haspopup="true" bs-dropdown class="btn btn-primary pull-right" data-animation="am-flip-x" data-placement="bottom-right" type="button">
+                    <i class="fa fa-user"></i>&nbsp;
+                    <span ng-bind="$root._user.fullName || 'Unknown User'"></span>&nbsp;
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li ng-if="$root._shared.stripePubKey && $root._shared.plans">
+                      <a href="/Subscription">
+                        <i class="fa fa-money"></i>
+                        &nbsp;Subscription
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/Users/{{$root._user._id}}">
+                        <i class="fa fa-gear"></i>
+                        &nbsp;Settings
+                      </a>
+                    </li>
+                    <li>
+                      <a href="" ng-click="signout();">
+                        <i class="fa fa-sign-out"></i>
+                        &nbsp;Sign Out
+                      </a>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <!-- PARTIAL CONTENT -->
+                <div ng-view></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="/components/angular/angular.min.js"></script>
+    <script src="/components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="/components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="/components/angular-animate/angular-animate.min.js"></script>
+    <script src="/components/angular-route/angular-route.min.js"></script>
+    <script src="/components/Chart.js/Chart.min.js"></script>
+    <script src="/components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="/components/ladda/dist/spin.min.js"></script>
+    <script src="/components/ladda/dist/ladda.min.js"></script>
+    <script src="/components/ladda-angular/dist/ladda-angular.min.js"></script>
+    <script src="/components/textAngular/dist/textAngular-sanitize.min.js"></script>
+    <script src="/components/textAngular/dist/textAngular-rangy.min.js"></script>
+    <script src="/components/textAngular/dist/textAngular.min.js"></script>
+    <script src="/components/jquery/dist/jquery.min.js"></script>
+    <script src="/components/papaparse/papaparse.min.js"></script>
+    <script src="/components/blueimp-md5/js/md5.min.js"></script>
+    <script src="/components/phoneformat/dist/phone-format.min.js"></script>
+    <script src="/components/dirPagination/dirPagination.js"></script>
+
+    <script type="text/javascript" src="//js.stripe.com/v2/"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>

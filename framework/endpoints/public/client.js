@@ -2,7 +2,7 @@
   'use strict';
 
   var models = __models; //{Campaign:null, Contact:null, Lead:null, Meeting:null, Message:null};
-  var app = angular.module("BanzaiApp", ['mgcrea.ngStrap', 'ngRoute', 'ngAnimate', 'angularUtils.directives.dirPagination', 'textAngular', 'chart.js', 'ladda']);
+  var app = angular.module("NammApp", ['mgcrea.ngStrap', 'ngRoute', 'ngAnimate', 'angularUtils.directives.dirPagination', 'textAngular', 'chart.js', 'ladda']);
 
   var timezones = [
       ["EST	Eastern Standard Time (North America)	UTC−05", -5],
