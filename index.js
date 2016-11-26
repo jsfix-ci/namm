@@ -118,7 +118,7 @@ function init(models) {
         app.use(favicon(exports.faviconPath));
     }
     app.set('view engine', 'ejs');
-    app.set('views', exports.viewPath);
+    app.set('views', exports.viewPath || './views');
 
     //console.log(mongoose.model('User').schema.tree);
     if(models){
