@@ -58,6 +58,15 @@ module.exports = function(namm){
                     js += JSON.stringify(shared);
                 }
 
+                if(namm.stripeOptions){
+                    var sharedStripeInfo = {
+                        plans: namm.stripeOptions.planData,
+                        stripePubKey: namm.stripeOptions.stripePubKey
+                    };
+                    js += "\n__stripe = ";
+                    js += JSON.stringify(sharedStripeInfo);
+                }
+
                 _modelsjs = js;
             }
 

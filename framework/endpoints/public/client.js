@@ -333,6 +333,10 @@
         $rootScope._shared = __shared;
       }
 
+      if(typeof __stripe !== 'undefined' && __stripe){
+        $rootScope._stripe = __stripe;
+      }
+
       if(typeof __user !== 'undefined' && __user){
         $rootScope._user = __user;
       }
