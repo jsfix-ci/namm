@@ -10,6 +10,9 @@ module.exports = function(){
         var items = fs.readdirSync(path);
 
         for (var i=0; i<items.length; i++) {
+            if(items[i][0] == '.'){
+                continue;
+            }
             var decls = require(path + '/' + items[i]);
             if(nested){
                 var sub = {};
