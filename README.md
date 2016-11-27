@@ -1,5 +1,7 @@
 # namm
 
+example reddit clone application: https://github.com/melnx/namm_example
+
 sample usage:
 ```
 require('namm')
