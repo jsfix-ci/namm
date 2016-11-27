@@ -140,6 +140,7 @@ function init(models) {
 
     if(exports.stripeOptions){
         require("./framework/payments/setupStripeRoutes")(exports);
+        resources['Subscription'] = require(__dirname + '/models/Subscription').Subscription;
     }
 
     setupModels();
