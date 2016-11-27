@@ -6,7 +6,7 @@ sample usage:
 ```
 require('namm')
     .public(__dirname + '/public')                // static folder completely accessible to the client
-    //.layout(__dirname + '/public/base.html')    // [optional] override the lyaout if you want
+    //.layout(__dirname + '/public/base.html')    // [optional] override the layout if you want
     .partials(__dirname + '/public/partials')     // partial views to load for different model actions (e.g.: ./public/partials/posts/index.html)
     .favicon(__dirname + '/public/favicon.ico')   // [optional] favicon path
     .models(__dirname + "/models")                // models folder (e.g.: ./models/Post.js)
