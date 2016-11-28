@@ -1,6 +1,6 @@
 {
   "name": "namm",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "Node Angular Mongo Module SPA Framework",
   "main": "index.js",
   "dependencies": {
@@ -34,12 +34,16 @@
     "angular",
     "mongo",
     "SPA",
+    "framework",
     "REST",
     "API",
     "authentication",
     "recurring billing",
     "single page application",
-    "analytics"
+    "analytics",
+    "node.js",
+    "nodejs",
+    "angularjs"
   ],
   "author": "melnx",
   "license": "ISC",
