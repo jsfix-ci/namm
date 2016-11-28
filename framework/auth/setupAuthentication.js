@@ -78,6 +78,16 @@ function initMailgunIfNeeded(){
     }
 }
 
+function getHomePath(user){
+    return
+
+    homePages ?
+        (typeof homePages === "function" ? homePages(user) :
+            typeof homePages === "object" ? homePages[user.role || "user"] :
+                homePages) : "/";
+
+}
+
 function setupAuthentication(app, conf, namm) {
   config = conf;
 
@@ -265,7 +275,7 @@ function setupAuthentication(app, conf, namm) {
             if (err) { return next(err); }
             // Redirect if it succeeds
 
-            var redirectPath = homePages ? homePages[user.role || "user"] : "/";
+            var redirectPath = getHomePath(user);
             return res.redirect(redirectPath);
         });
     })(req, res, next);
@@ -299,7 +309,7 @@ function setupAuthentication(app, conf, namm) {
             if (err) { return next(err); }
             // Redirect if it succeeds
 
-            var redirectPath = homePages ? homePages[user.role || "user"] : "/";
+            var redirectPath = getHomePath(user);
             return res.redirect(redirectPath);
         });
     })(req, res, next);
