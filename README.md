@@ -21,6 +21,7 @@ require('namm')
         }
     })
     .routes(__dirname + '/routes')                // [optional] custom server-side endpoints
+    .registrationCode('1SecretCode!')             // [optional] secret code to gate sign-ups
     //.services(__dirname + '/services')          // [optional] services shared with the angular app
     //.views(__dirname + '/views')                // [optional] login view override
     //.sockets()                                  // [optional] sockets for online status tracking/chat
