@@ -7,6 +7,7 @@ var md5 = require('blueimp-md5');
 var flash = require('express-flash');
 var mongoose = require('mongoose');
 var config = null;
+var debug = false;
 
 Schema = mongoose.Schema;
 
@@ -16,6 +17,7 @@ var registrationCode = null;
 function setupUserModel(userModel, namm){
 
     homePages = userModel.$home;
+    debug = namm.debug;
 
     var userProps = {
         username: {type: String, unique : true, $hidden:true, $immutable:true},
@@ -79,14 +81,18 @@ function initMailgunIfNeeded(){
 }
 
 function getHomePath(user){
-    console.log("$HOME TYPE: " + typeof homePages);
+    if(debug){
+        console.log("$HOME TYPE: " + typeof homePages);
+    }
 
     var home = homePages ?
         (typeof homePages === "function" ? homePages(user) :
             typeof homePages === "object" ? homePages[user.role || "user"] :
                 homePages) : "/";
 
-    console.log("home page: " + home);
+    if(debug){
+        console.log("home page: " + home);
+    }
 
     return home;
 }
@@ -95,6 +101,7 @@ function setupAuthentication(app, conf, namm) {
   config = conf;
 
   registrationCode = namm.registrationPassword;
+  debug = namm.debug;
 
   var User = mongoose.model('User');
 
