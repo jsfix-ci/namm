@@ -69,10 +69,12 @@
                   <input type="password" class="form-control input-lg" placeholder="Confirm Password" name="confirmpassword">
                   <span class="fa fa-lock form-control-feedback"></span>
                 </div>
+                <%if (registrationCode) { %>
                 <div class="form-group has-feedback">
                   <input type="password" class="form-control input-lg" placeholder="Secret Key" name="secretkey">
                   <span class="fa fa-key form-control-feedback"></span>
                 </div>
+                <% } %>
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="checkbox checkbox-primary">

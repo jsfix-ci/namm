@@ -135,8 +135,8 @@ function init(models) {
 
     connectToDatabase();
 
-    setupUserModel(resources.User, exports.stripeOptions);
-    setupAuthentication(app, config);
+    setupUserModel(resources.User, exports);
+    setupAuthentication(app, config, exports);
 
     if(exports.stripeOptions){
         require("./framework/payments/setupStripeRoutes")(exports);

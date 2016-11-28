@@ -75,6 +75,11 @@ module.exports = function(exports){
         return exports;
     }
 
+    exports.registrationCode = function set_registration_code(code){
+        exports.registrationPassword = code;
+        return exports;
+    }
+
     exports.public = function set_public(path){
         exports.staticPath = path;
         return exports;

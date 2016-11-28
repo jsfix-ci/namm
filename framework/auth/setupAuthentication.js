@@ -11,8 +11,9 @@ var config = null;
 Schema = mongoose.Schema;
 
 var homePages = null;
+var registrationCode = null;
 
-function setupUserModel(userModel, stripeOptions){
+function setupUserModel(userModel, namm){
 
     homePages = userModel.$home;
 
@@ -57,9 +58,9 @@ function setupUserModel(userModel, stripeOptions){
 
     var userSchema = new Schema(userProps);
 
-    if(stripeOptions){
+    if(namm.stripeOptions){
         var stripeCustomer = require('../payments/stripeCustomer');
-        userSchema.plugin(stripeCustomer, stripeOptions);
+        userSchema.plugin(stripeCustomer, namm.stripeOptions);
     }
 
     mongoose.model('User', userSchema);
@@ -77,9 +78,10 @@ function initMailgunIfNeeded(){
     }
 }
 
-function setupAuthentication(app, conf) {
+function setupAuthentication(app, conf, namm) {
   config = conf;
 
+  registrationCode = namm.registrationPassword;
 
   var User = mongoose.model('User');
 
@@ -177,7 +179,7 @@ function setupAuthentication(app, conf) {
         // find a user in Mongo with provided username
         console.log('SIGNUP: (attempt)');
 
-        if (req.body.secretkey != '1Melnx!') {
+        if (registrationCode && req.body.secretkey != registrationCode) {
           console.log("SECRET KEY DOESN'T MATCH");
           return done(null, false,
             req.flash('error', "Secret Key didn't match. Please try again!"));
@@ -276,7 +278,7 @@ function setupAuthentication(app, conf) {
 
   /* GET Registration Page */
   app.get('/signup', function(req, res) {
-    res.render('signup');
+    res.render('signup', {registrationCode: registrationCode});
     //res.render('register', {
     //  message: req.flash('message')
     //});
