@@ -5,6 +5,7 @@ module.exports = function(exports){
     var connectors = exports.connectorList;
     var services = exports.serviceList;
     require("../util/util")();
+    //var path = require('path');
 
     function route(method, endpoint, handler, $public){
         var params = {method: method, endpoint: endpoint, handler:handler};
@@ -39,6 +40,7 @@ module.exports = function(exports){
         return exports;
     }
 
+    //exports.modelsPath = path.dirname(require.main.filename) + "/models";
     exports.require = exports.models = function require_path(path){
         load_directory(path, resources);
         exports.modelsPath = path;
@@ -60,6 +62,7 @@ module.exports = function(exports){
         return exports;
     }
 
+    //exports.partialsPath = path.dirname(require.main.filename) + "/public/partials";
     exports.partials = function set_partials(path){
         exports.partialsPath = path;
         return exports;
@@ -80,6 +83,7 @@ module.exports = function(exports){
         return exports;
     }
 
+    //exports.staticPath = path.dirname(require.main.filename) + "/public";
     exports.public = function set_public(path){
         exports.staticPath = path;
         return exports;
