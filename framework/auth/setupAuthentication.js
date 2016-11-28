@@ -79,13 +79,16 @@ function initMailgunIfNeeded(){
 }
 
 function getHomePath(user){
-    return
+    console.log("$HOME TYPE: " + typeof homePages);
 
-    homePages ?
+    var home = homePages ?
         (typeof homePages === "function" ? homePages(user) :
             typeof homePages === "object" ? homePages[user.role || "user"] :
                 homePages) : "/";
 
+    console.log("home page: " + home);
+
+    return home;
 }
 
 function setupAuthentication(app, conf, namm) {
