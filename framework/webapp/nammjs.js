@@ -5,7 +5,7 @@ module.exports = function(namm){
     var scripts = namm.clientscripts;
     var stylesheets = namm.stylesheets;
 
-    function loadScripts(filenames, cb, elem){
+    function loadScripts(filenames, cb, elem, parallel){
         var filesLoaded = 0;
 
         function loadFile(i){
@@ -29,13 +29,19 @@ module.exports = function(namm){
                 console.log("loaded  " + filename);
                 filesLoaded++;
                 if(filesLoaded == filenames.length){ cb(null, e); }
-                else{ loadFile(filesLoaded) }
+                else if(!parallel){ loadFile(filesLoaded) }
             }, false); }
 
             document.getElementsByTagName(elem||"head")[0].appendChild(fileref)
         }
 
-        loadFile(filesLoaded);
+        if(parallel){
+            loadFile(filesLoaded);
+        }else{
+            for(var i in filenames){
+                loadFile(i);
+            }
+        }
     }
 
     function bootstrapAngularApp(){
@@ -56,11 +62,11 @@ module.exports = function(namm){
 
         script += loadClientJs.toString();
 
-        script += "\nvar scripts = " + JSON.stringify(scripts);;
-        script += "\nvar stylesheets = " + JSON.stringify(stylesheets);;
+        script += "\nvar scripts = " + JSON.stringify(scripts);
+        script += "\nvar stylesheets = " + JSON.stringify(stylesheets);
 
-        script += "\nloadScripts(stylesheets)";
-        script += "\nloadScripts(scripts, loadClientJs);";
+        script += "\nloadScripts(stylesheets);";
+        script += "\nloadScripts(scripts, loadClientJs, 'head', true);";
 
         res.send(script);
     }
