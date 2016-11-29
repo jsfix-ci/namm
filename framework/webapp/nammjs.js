@@ -35,7 +35,7 @@ module.exports = function(namm){
             document.getElementsByTagName(elem||"head")[0].appendChild(fileref)
         }
 
-        if(parallel){
+        if(!parallel){
             loadFile(filesLoaded);
         }else{
             for(var i in filenames){
