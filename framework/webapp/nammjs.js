@@ -5,7 +5,7 @@ module.exports = function(namm){
     var scripts = namm.clientscripts;
     var stylesheets = namm.stylesheets;
 
-    function loadScripts(filenames, cb){
+    function loadScripts(filenames, cb, elem){
         var filesLoaded = 0;
         for(var i in filenames){
             var filename = filenames[i];
@@ -18,8 +18,8 @@ module.exports = function(namm){
                 fileref.setAttribute("src", filename)
             }else if(filename.indexOf(".css") >= 0){
                 fileref = document.createElement('link')
-                fileref.setAttribute("type","text/css")
                 fileref.setAttribute("href", filename)
+                fileref.setAttribute("rel","stylesheet")
             }
 
             if (cb) { fileref.addEventListener('load', function (e) {
@@ -27,7 +27,7 @@ module.exports = function(namm){
                 if(filesLoaded == filenames.length){ cb(null, e); }
             }, false); }
 
-            document.getElementsByTagName("head")[0].appendChild(fileref)
+            document.getElementsByTagName(elem||"head")[0].appendChild(fileref)
         }
     }
 
@@ -37,17 +37,23 @@ module.exports = function(namm){
         });
     }
 
+    function loadClientJs(){
+        loadScripts(['/client.js'], bootstrapAngularApp, "body")
+    }
+
     return function(req, res) {
 
         var script = loadScripts.toString();
 
         script += bootstrapAngularApp.toString();
 
+        script += loadClientJs.toString();
+
         script += "\nvar scripts = " + JSON.stringify(scripts);;
         script += "\nvar stylesheets = " + JSON.stringify(stylesheets);;
 
         script += "\nloadScripts(stylesheets)";
-        script += "\nloadScripts(scripts, bootstrapAngularApp);";
+        script += "\nloadScripts(scripts, loadClientJs);";
 
         res.send(script);
     }

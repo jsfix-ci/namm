@@ -119,7 +119,7 @@ module.exports = function(exports){
         '/_services.js',
         'components/angular/angular.min.js',
         '/components/angular-route/angular-route.min.js',
-        '/client.js',
+        //'/client.js',
     ];
     exports.scripts = function use_scripts(scripts){
         scripts.forEach(function(script){
