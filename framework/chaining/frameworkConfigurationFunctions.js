@@ -139,6 +139,8 @@ module.exports = function(exports){
         "/components/phoneformat/dist/phone-format.min.js",
         "/components/dirPagination/dirPagination.js",
 
+        "https://js.stripe.com/v2/",
+
         //'/client.js',
     ];
     exports.scripts = function use_scripts(scripts){
