@@ -5,9 +5,10 @@ module.exports = function(namm){
     var scripts = namm.clientscripts;
     var stylesheets = namm.stylesheets;
 
-    function loadScripts(filenames, cb, elem, method){
+    function loadScripts(filenames, cb, elem){
         var filesLoaded = 0;
-        for(var i in filenames){
+
+        function loadFile(i){
             var filename = filenames[i];
 
             var fileref = null;
@@ -25,10 +26,13 @@ module.exports = function(namm){
             if (cb) { fileref.addEventListener('load', function (e) {
                 filesLoaded++;
                 if(filesLoaded == filenames.length){ cb(null, e); }
+                else{ loadFile(filesLoaded) }
             }, false); }
 
             document.getElementsByTagName(elem||"head")[0].appendChild(fileref)
         }
+
+        loadFile(filesLoaded);
     }
 
     function bootstrapAngularApp(){
