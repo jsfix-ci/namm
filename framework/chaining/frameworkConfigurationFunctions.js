@@ -151,8 +151,14 @@ module.exports = function(exports){
     }
 
     exports.stylesheets = [
-        '/components/bootstrap/dist/css/bootstrap.css',
+        "/components/bootstrap/dist/css/bootstrap.css",
+        "/components/bootstrap-additions/dist/modules/aside.css",
+        "/components/angular-motion/dist/angular-motion.min.css",
+        "/components/font-awesome/css/font-awesome.min.css",
+        "/components/textAngular/dist/textAngular.css",
+        "/components/ladda/dist/ladda-themeless.min.css"
     ]
+
     exports.styles = function use_styles(styles){
         styles.forEach(function(style){
             if(style == null){
