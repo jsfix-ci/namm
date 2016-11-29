@@ -66,7 +66,7 @@ module.exports = function(namm){
         script += "\nvar stylesheets = " + JSON.stringify(stylesheets);
 
         script += "\nloadScripts(stylesheets);";
-        script += "\nloadScripts(scripts, loadClientJs, 'head', true);";
+        script += "\nloadScripts(scripts, loadClientJs);";
 
         res.send(script);
     }
