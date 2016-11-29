@@ -19,6 +19,11 @@ function setupUserModel(userModel, namm){
     homePages = userModel.$home;
     debug = namm.debug;
 
+    //$private : can see but cannot update unless you're admin
+    //$internal : cannot see or update
+    //$immutable : if not set you can update it, but once it's set you can't
+    //$hidden : hide from api results unless you're __owner of the object or you're the user (in case of User object)
+
     var userProps = {
         username: {type: String, unique : true, $hidden:true, $immutable:true},
         password: {type: String, $internal:true},

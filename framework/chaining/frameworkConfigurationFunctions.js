@@ -113,4 +113,31 @@ module.exports = function(exports){
         exports.useSockets = true;
         return exports;
     }
+
+    exports.clientscripts = [
+        '/_models.js',
+        '/_services.js',
+        'components/angular/angular.min.js',
+        '/components/angular-route/angular-route.min.js',
+        '/client.js',
+    ];
+    exports.scripts = function use_scripts(scripts){
+        scripts.forEach(function(script){
+            exports.clientscripts.push(script);
+        });
+        return exports;
+    }
+
+    exports.stylesheets = [
+        '/components/bootstrap/dist/css/bootstrap.css',
+    ]
+    exports.styles = function use_styles(styles){
+        styles.forEach(function(style){
+            if(style == null){
+                exports.stylesheets = [];
+            }
+            exports.stylesheets.push(style);
+        });
+        return exports;
+    };
 }
