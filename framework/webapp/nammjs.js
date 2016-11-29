@@ -5,7 +5,7 @@ module.exports = function(namm){
     var scripts = namm.clientscripts;
     var stylesheets = namm.stylesheets;
 
-    function loadScripts(filenames, cb, elem){
+    function loadScripts(filenames, cb, elem, method){
         var filesLoaded = 0;
         for(var i in filenames){
             var filename = filenames[i];

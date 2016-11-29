@@ -117,8 +117,29 @@ module.exports = function(exports){
     exports.clientscripts = [
         '/_models.js',
         '/_services.js',
-        'components/angular/angular.min.js',
+        '/components/angular/angular.min.js',
         '/components/angular-route/angular-route.min.js',
+
+        "/components/angular-strap/dist/angular-strap.min.js",
+        "/components/angular-strap/dist/angular-strap.tpl.min.js",
+        "/components/angular-animate/angular-animate.min.js",
+        "/components/angular-route/angular-route.min.js",
+        "/components/Chart.js/Chart.min.js",
+        "/components/angular-chart.js/dist/angular-chart.js",
+        "/components/ladda/dist/spin.min.js",
+        "/components/ladda/dist/ladda.min.js",
+        "/components/ladda-angular/dist/ladda-angular.min.js",
+        "/components/textAngular/dist/textAngular-sanitize.min.js",
+        "/components/textAngular/dist/textAngular-rangy.min.js",
+        "/components/textAngular/dist/textAngular.min.js",
+        "/components/jquery/dist/jquery.min.js",
+        "/components/papaparse/papaparse.min.js",
+        "/components/blueimp-md5/js/md5.min.js",
+        "/components/phoneformat/dist/phone-format.min.js",
+        "/components/dirPagination/dirPagination.js",
+
+        "//js.stripe.com/v2/"
+
         //'/client.js',
     ];
     exports.scripts = function use_scripts(scripts){

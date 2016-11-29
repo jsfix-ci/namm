@@ -31,6 +31,8 @@ require('namm')
     .init();                                      // actually start the application
 ```
 
+## Getting Started
+
 Just think of what models (resources) your application uses and how they are associated,
 put your schemas in the models folder
 
@@ -44,6 +46,21 @@ If the automatic REST api is not enough, you can create custom routes using the 
 
 There's a default layout file but you can specify you own via layout(<path>) call
 
+## Sample Code
+
+check the `samples` folder for the bower files (bower.json + .bowerrc) server.js and stripeOptions.js,
+https://github.com/melnx/namm/tree/master/samples
+copy-paste them to your project's root directory for a quick start.
+
+if you don't have bower, install it, it helps you install all the client-side dependencies for this framework:
+```
+npm install -g bower
+```
+
+then, to install all the components run
+```
+bower install
+```
 
 ## Configuration File:
 
@@ -142,7 +159,7 @@ This example creates a new post and saves it to the database via REST api
 ```
 note the usage of item, new(), create() and action()
 
-## Route Files
+## Route Files (optional)
 
 route files are not necessary but can help you add custom server-side logic if the automatic API is not enough
 
@@ -169,7 +186,7 @@ PUBLIC makes it accessible without authentication
 POST/GET explicitly specify the method, by default they are private and GET.
 for example "PUBLIC|POST /util/downvotePost/:id" would make it PUBLIC and POST
 
-## Layout file
+## Layout File (optional)
 
 There's a default layout file but you can override it by calling layout(<path>)
 The layout file is a simple angular file that uses NammApp as ng-app, MainController as ng-controller, and has an ng-view div to load the partials
