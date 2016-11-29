@@ -124,6 +124,7 @@ module.exports = function(exports){
         "/components/angular-strap/dist/angular-strap.tpl.min.js",
         "/components/angular-animate/angular-animate.min.js",
         "/components/angular-route/angular-route.min.js",
+
         "/components/Chart.js/Chart.min.js",
         "/components/angular-chart.js/dist/angular-chart.js",
         "/components/ladda/dist/spin.min.js",

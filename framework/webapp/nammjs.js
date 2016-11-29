@@ -11,19 +11,22 @@ module.exports = function(namm){
         function loadFile(i){
             var filename = filenames[i];
 
+            console.log("loading " + filename);
+
             var fileref = null;
 
-            if(filename.indexOf(".js") >= 0){
-                fileref = document.createElement('script')
-                fileref.setAttribute("type","text/javascript")
-                fileref.setAttribute("src", filename)
-            }else if(filename.indexOf(".css") >= 0){
+            if(filename.indexOf(".css") >= 0){
                 fileref = document.createElement('link')
                 fileref.setAttribute("href", filename)
-                fileref.setAttribute("rel","stylesheet")
+                fileref.setAttribute("rel", "stylesheet")
+            }else{
+                fileref = document.createElement('script')
+                fileref.setAttribute("type", "text/javascript")
+                fileref.setAttribute("src", filename)
             }
 
             if (cb) { fileref.addEventListener('load', function (e) {
+                console.log("loaded  " + filename);
                 filesLoaded++;
                 if(filesLoaded == filenames.length){ cb(null, e); }
                 else{ loadFile(filesLoaded) }
