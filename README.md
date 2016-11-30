@@ -8,7 +8,7 @@ sample usage:
 ```javascript
 require('namm')
     .public(__dirname + '/public')                // static folder completely accessible to the client
-    //.layout(__dirname + '/public/base.html')    // [optional] override the layout if you want
+    .layout(__dirname + '/public/base.html')      // [optional] override the layout if you want
     .partials(__dirname + '/public/partials')     // partial views to load for different model actions (e.g.: ./public/partials/posts/index.html)
     .favicon(__dirname + '/public/favicon.ico')   // [optional] favicon path
     .models(__dirname + "/models")                // models folder (e.g.: ./models/Post.js)
@@ -24,10 +24,9 @@ require('namm')
     })
     .routes(__dirname + '/routes')                // [optional] custom server-side endpoints
     .registrationCode('1SecretCode!')             // [optional] secret code to gate sign-ups
-    //.services(__dirname + '/services')          // [optional] services shared with the angular app
-    //.views(__dirname + '/views')                // [optional] login view override
-    //.sockets()                                  // [optional] sockets for online status tracking/chat
-    //.connectors('./connectors')
+    .services(__dirname + '/services')            // [optional] services shared with the angular app
+    .views(__dirname + '/views')                  // [optional] login view override
+    .sockets()                                    // [optional] sockets for online status tracking/chat
     .init();                                      // actually start the application
 ```
 
@@ -142,7 +141,7 @@ module.exports = {
 ### URLs
 
 |Method | Url          | Action                                  |
-|-------|--------------|-----------------------------------------|
+|:------|:-------------|:----------------------------------------|
 |GET    |/Model        | Retrieves a list of [Model]s            |
 |GET    |/Model/id     | Retrieves a specific [Model]            |
 |POST   |/Model        | Creates a new [Model]                   |
@@ -157,7 +156,7 @@ module.exports = {
 all endpoints returning a list of [Model] can be filtered
 
 | GET Parameter Name  | Result                                                                                             |
-|---------------------|----------------------------------------------------------------------------------------------------|
+|:--------------------|:---------------------------------------------------------------------------------------------------|
 | [fieldName]         | filters to the parameter's value or the mongo expression passed (e.g. `{$gt:2}`)                   |
 | $sort               | sorts by the field name specified by the parameter value or a sort expression (e.g. `{created:-1}` |
 | $skip               | skips the number of documents specified by the value                                               |
@@ -190,7 +189,7 @@ note the usage of item, new(), create() and action()
 ## View URLs
 
 | URL                 | View Path                               |
-|---------------------|-----------------------------------------|
+|:--------------------|:----------------------------------------|
 | */[Model]/action*   | /public/partials/[model]s/action.html   |
 | */[Model]/id*       | /public/partials/[model]s/show.html     |
 | */[Model]/id/action | /public/partials/[model]s/action.html   |
