@@ -2,10 +2,14 @@ module.exports = function(namm){
 
     var fs = require("fs");
 
-    var scripts = namm.clientscripts;
     var stylesheets = namm.stylesheets;
 
-    function loadScripts(filenames, cb, elem, parallel){
+    var scripts = [];
+    for(var i in namm.clientscripts_angular){ scripts.push(namm.clientscripts_angular[i]) }
+    for(var i in namm.clientscripts){ scripts.push(namm.clientscripts[i]) }
+    for(var i in namm.clientscripts_namm){ scripts.push(namm.clientscripts_namm[i]) }
+
+    function loadScripts(filenames, cb, elem){
         var filesLoaded = 0;
 
         function loadFile(i){
@@ -13,7 +17,7 @@ module.exports = function(namm){
 
             if(!filename) return;
 
-            console.log("loading " + filename);
+            //console.log("loading " + filename);
 
             var fileref = null;
 
@@ -25,27 +29,20 @@ module.exports = function(namm){
                 fileref = document.createElement('script')
                 fileref.setAttribute("type", "text/javascript")
                 fileref.setAttribute("src", filename)
-                if(parallel){
-                    fileref.async = false;
-                }
+                fileref.async = false;
             }
 
             if (cb) { fileref.addEventListener('load', function (e) {
-                console.log("loaded  " + filename);
+                //console.log("loaded  " + filename);
                 filesLoaded++;
                 if(filesLoaded == filenames.length){ cb(null, e); }
-                else if(!parallel){ loadFile(filesLoaded) }
             }, false); }
 
             document.getElementsByTagName(elem||"head")[0].appendChild(fileref)
         }
 
-        if(!parallel){
-            loadFile(filesLoaded);
-        }else{
-            for(var i in filenames){
-                loadFile(i);
-            }
+        for(var i in filenames){
+            loadFile(i);
         }
     }
 
@@ -55,15 +52,15 @@ module.exports = function(namm){
         });
     }
 
-    function loadClientJs(){
+    /*function loadClientJs(){
         loadScripts(['/client.js'], bootstrapAngularApp, "body")
     }
 
     function loadAngular(){
         loadScripts(['/components/angular/angular.min.js'], function(){
-            loadScripts(scripts, loadClientJs, 'body', true);
+            loadScripts(scripts, loadClientJs, 'body');
         });
-    }
+    }*/
 
     return function(req, res) {
 
@@ -71,15 +68,15 @@ module.exports = function(namm){
 
         script += bootstrapAngularApp.toString() + "\n";
 
-        script += loadClientJs.toString() + "\n";
-
-        script += loadAngular.toString() + "\n";
+        //script += loadClientJs.toString() + "\n";
+        //script += loadAngular.toString() + "\n";
 
         script += "\nvar scripts = " + JSON.stringify(scripts);
         script += "\nvar stylesheets = " + JSON.stringify(stylesheets);
 
-        script += "\nloadScripts(stylesheets, null, 'head', true);";
-        script += "\nloadAngular()";
+        script += "\nloadScripts(stylesheets);";
+        script += "\nloadScripts(scripts);";
+        //script += "\nloadAngular()";
 
         res.send(script);
     }

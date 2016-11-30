@@ -114,17 +114,23 @@ module.exports = function(exports){
         return exports;
     }
 
-    exports.clientscripts = [
-        '/_models.js',
-        '/_services.js',
-
-        '/components/angular-route/angular-route.min.js',
+    exports.clientscripts_angular = [
+        "/components/angular/angular.min.js"
+        "/components/angular-route/angular-route.min.js",
 
         "/components/angular-strap/dist/angular-strap.min.js",
         "/components/angular-strap/dist/angular-strap.tpl.min.js",
         "/components/angular-animate/angular-animate.min.js",
         "/components/angular-route/angular-route.min.js",
+    ];
 
+    exports.clientscripts_namm = [
+        "/_models.js",
+        "/_services.js",
+        "/client.js",
+    ];
+
+    exports.clientscripts = [
         "/components/Chart.js/Chart.min.js",
         "/components/angular-chart.js/dist/angular-chart.js",
         "/components/ladda/dist/spin.min.js",
@@ -140,9 +146,8 @@ module.exports = function(exports){
         "/components/dirPagination/dirPagination.js",
 
         "https://js.stripe.com/v2/",
-
-        //'/client.js',
     ];
+
     exports.scripts = function use_scripts(scripts){
         scripts.forEach(function(script){
             exports.clientscripts.push(script);
