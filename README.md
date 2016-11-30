@@ -188,11 +188,11 @@ note the usage of item, new(), create() and action()
 
 ## View URLs
 
-| URL                 | View Path                               |
-|:--------------------|:----------------------------------------|
-| */[Model]/action*   | /public/partials/[model]s/action.html   |
-| */[Model]/id*       | /public/partials/[model]s/show.html     |
-| */[Model]/id/action | /public/partials/[model]s/action.html   |
+| URL                | View Path                               |
+|:-------------------|:----------------------------------------|
+| /[Model]/action    | /public/partials/[model]s/action.html   |
+| /[Model]/id        | /public/partials/[model]s/show.html     |
+| /[Model]/id/action | /public/partials/[model]s/action.html   |
 
 
 ## Route Files (optional)
@@ -230,21 +230,18 @@ The layout file is a simple angular file that uses NammApp as ng-app, MainContro
 ```html
 <html ng-app="NammApp">
     <head>
-        <script src="/_models.js"></script>
-        <script src="/_services.js"></script>
+        <title>My App</title>
     </head>
     <body ng-controller="MainController">
         <div ng-view></div>
 
-        <script src="/components/angular/angular.min.js"></script>
-        <script src="/components/angular-route/angular-route.min.js"></script>
-        <script src="/client.js"></script>
+        <script src="/namm.js"></script>
     </body>
 </html>
 ```
 
-This is the simplest layout possible, it simply loads the partials to take up the whole page
-Currently these scripts are required to make the application run properly (will load them automatically in the future)
+This is the simplest layout possible, it loads the partials to take up the whole page
+namm.js automatically loads all the other scripts/styles needed
 
 
 
