@@ -25,6 +25,9 @@ module.exports = function(namm){
                 fileref = document.createElement('script')
                 fileref.setAttribute("type", "text/javascript")
                 fileref.setAttribute("src", filename)
+                if(parallel){
+                    fileref.async = false;
+                }
             }
 
             if (cb) { fileref.addEventListener('load', function (e) {
