@@ -115,7 +115,7 @@ module.exports = function(exports){
     }
 
     exports.clientscripts_angular = [
-        "/components/angular/angular.min.js"
+        "/components/angular/angular.min.js",
         "/components/angular-route/angular-route.min.js",
 
         "/components/angular-strap/dist/angular-strap.min.js",
