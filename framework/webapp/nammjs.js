@@ -58,7 +58,7 @@ module.exports = function(namm){
 
     function loadAngular(){
         loadScripts(['/components/angular/angular.min.js'], function(){
-            loadScripts(scripts, loadClientJs, 'body');
+            loadScripts(scripts, loadClientJs, 'body', true);
         });
     }
 
