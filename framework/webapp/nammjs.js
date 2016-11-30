@@ -54,6 +54,12 @@ module.exports = function(namm){
         loadScripts(['/client.js'], bootstrapAngularApp, "body")
     }
 
+    function loadAgular(){
+        loadScripts(['/components/angular/angular.min.js'], function(){
+            loadScripts(scripts, loadClientJs, 'body', true);
+        });
+    }
+
     return function(req, res) {
 
         var script = loadScripts.toString();
@@ -62,11 +68,13 @@ module.exports = function(namm){
 
         script += loadClientJs.toString();
 
+        script += loadAgular.toString();
+
         script += "\nvar scripts = " + JSON.stringify(scripts);
         script += "\nvar stylesheets = " + JSON.stringify(stylesheets);
 
         script += "\nloadScripts(stylesheets, null, 'head', true);";
-        script += "\nloadScripts(scripts, loadClientJs);";
+        script += "\nloadAngular()";
 
         res.send(script);
     }
