@@ -11,6 +11,8 @@ module.exports = function(namm){
         function loadFile(i){
             var filename = filenames[i];
 
+            if(!filename) return;
+
             console.log("loading " + filename);
 
             var fileref = null;
