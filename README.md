@@ -156,12 +156,12 @@ module.exports = {
 
 all endpoints returning a list of [Model] can be filtered
 
-| GET Parameter Name  | Result                                                                                            |
-|---------------------|---------------------------------------------------------------------------------------------------|
-| [fieldName]         | filters to the parameter's value or the mongo expression passed (e.g. `{$gt:2}`)                  |
-| $sort               | sorts by the field name specified by the parameter value or a sort expression (e.g. `{created:-1} |
-| $skip               | skips the number of documents specified by the value                                              |
-| $limit              | limits number of results to the value                                                             |
+| GET Parameter Name  | Result                                                                                             |
+|---------------------|----------------------------------------------------------------------------------------------------|
+| [fieldName]         | filters to the parameter's value or the mongo expression passed (e.g. `{$gt:2}`)                   |
+| $sort               | sorts by the field name specified by the parameter value or a sort expression (e.g. `{created:-1}` |
+| $skip               | skips the number of documents specified by the value                                               |
+| $limit              | limits number of results to the value                                                              |
 | $count              | populates counts based on value (e.g. `{commentCount:['Comment', '_post'], upvoted:['Vote', '_post', null, {points:{$gt:0}}], downvoted:['Vote', '_post', null, {points:{$lt:0}}]}`) |
 
 
