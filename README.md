@@ -36,15 +36,15 @@ require('namm')
 Just think of what models (resources) your application uses and how they are associated,
 put your schemas in the models folder
 
-Next think of views you want for various actions of this model and put them in /public/partials/<modelname>s/<action>.html
-these views can then be accessed in your browser via /<modelname>s/<action>  (index is the default action if the action is left empty)
+Next think of views you want for various actions of this model and put them in /public/partials/[model]s/[action].html
+these views can then be accessed in your browser via /[model]s/[action]  (index is the default action if the action is left empty)
 
 Access the advanced REST api via built in angular helper functions create() get() list() update() delete()
-or access it via the flexible action() helper function.  You can access the API manually by going to /api/v1/<model>/[[id]/action]
+or access it via the flexible action() helper function.  You can access the API manually by going to /api/v1/[model]/[[id]/action]
 
 If the automatic REST api is not enough, you can create custom routes using the /routes folder
 
-There's a default layout file but you can specify you own via layout(<path>) call
+There's a default layout file but you can specify you own via layout([path]) call
 
 ## Sample Code
 
@@ -77,7 +77,7 @@ module.exports = {
 
 ## Model Files
 
-model files are arranged in a flat structure in the folder you specify with your models("<path>") call
+model files are arranged in a flat structure in the folder you specify with your models("[path]") call
 by default this folder is "/models"
 
 ```javascript
@@ -137,27 +137,64 @@ module.exports = {
 
 ```
 
+## REST API
+
+### URLs
+
+|Method | Url          | Action                                  |
+|-------|--------------|-----------------------------------------|
+|GET    |/Model        | Retrieves a list of [Model]s            |
+|GET    |/Model/id     | Retrieves a specific [Model]            |
+|POST   |/Model        | Creates a new [Model]                   |
+|PUT    |/Model/id     | Updates [Model] with _id [id]           |
+|PATCH  |/Model/id     | Partially updates [Model] with _id [id] |
+|DELETE |/Model/id     | Deletes [Model] with _id [id]           |
+|GET    |/Model/reduce | Groups [Model] by $groupBy parameter, returns counts by default; (optionally aggregates via $aggregate parameter on field specified by $field parameter |
+|GET    |/Model/count  | Counts [Model] returns count            |
+
+### Filters
+
+all endpoints returning a list of [Model] can be filtered
+
+| GET Parameter Name  | Result                                                                                            |
+|---------------------|---------------------------------------------------------------------------------------------------|
+| [fieldName]         | filters to the parameter's value or the mongo expression passed (e.g. `{$gt:2}`)                  |
+| $sort               | sorts by the field name specified by the parameter value or a sort expression (e.g. `{created:-1} |
+| $skip               | skips the number of documents specified by the value                                              |
+| $limit              | limits number of results to the value                                                             |
+| $count              | populates counts based on value (e.g. `{commentCount:['Comment', '_post'], upvoted:['Vote', '_post', null, {points:{$gt:0}}], downvoted:['Vote', '_post', null, {points:{$lt:0}}]}`) |
+
+
 ## Partial View Files
 
-View files are simply angular template files. They live in the folder specified by your partials(<path>) call
+View files are simply angular template files. They live in the folder specified by your partials("[path]") call
 This example creates a new post and saves it to the database via REST api
 
 ```html
 <div ng-init="new()">
     Title<br />
-    <input style="width:500px;" type="text" ng-model="item.name" /><br />
+    <input type="text" ng-model="item.name" /><br />
     Url<br />
-    <input style="width:500px;" type="text" ng-model="item.url" /><br />
+    <input type="text" ng-model="item.url" /><br />
     Content<br />
-    <textarea style="height:120px; width:500px;" type="text" ng-model="item.content"></textarea><br />
+    <textarea type="text" ng-model="item.content"></textarea><br />
     Image (Override)<br />
-    <input style="width:500px;" type="text" ng-model="item.image" /><br />
+    <input type="text" ng-model="item.image" /><br />
     <br />
-    <div ng-if="_parameters._sub" style="margin-bottom: 10px;" ng-init="action('sub', 'Sub', 'get', _parameters._sub)">Posting to sub: {{sub.name}}</div>
+    <div ng-if="_parameters._sub" ng-init="action('sub', 'Sub', 'get', _parameters._sub)">Posting to sub: {{sub.name}}</div>
     <button ng-click="create()" type="submit" class="btn btn-primary">Post</button>
 </div>
 ```
 note the usage of item, new(), create() and action()
+
+## View URLs
+
+| URL                 | View Path                               |
+|---------------------|-----------------------------------------|
+| */[Model]/action*   | /public/partials/[model]s/action.html   |
+| */[Model]/id*       | /public/partials/[model]s/show.html     |
+| */[Model]/id/action | /public/partials/[model]s/action.html   |
+
 
 ## Route Files (optional)
 
@@ -188,7 +225,7 @@ for example "PUBLIC|POST /util/downvotePost/:id" would make it PUBLIC and POST
 
 ## Layout File (optional)
 
-There's a default layout file but you can override it by calling layout(<path>)
+There's a default layout file but you can override it by calling layout("[path]")
 The layout file is a simple angular file that uses NammApp as ng-app, MainController as ng-controller, and has an ng-view div to load the partials
 
 ```html
