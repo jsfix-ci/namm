@@ -9,12 +9,10 @@ module.exports = function(modelName, namm){
     var model = mongoose.model(modelName);
     this[modelName] = model;
 
-    var util_access = require('./util/access');
-    var util_util = require('./util/util');
+    var util_access = require('./util/access'), util_util = require('./util/util');
 
     return function(req, res) {
-        util_access(modelName, namm);
-        util_util(modelName, namm);
+        util_access(modelName, namm); util_util(modelName, namm);
 
         var access = getRoleAccess(req, 'get');
         if(debug){ console.log(modelName + "/get/:id Access: " + access + " [" + req.user.username + "]"); }
