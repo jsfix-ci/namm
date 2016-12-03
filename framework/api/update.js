@@ -8,9 +8,11 @@ module.exports = function(modelName, namm){
     var model = mongoose.model(modelName);
     this[modelName] = model;
 
+    var util_access = require('./util/access');
+
     return function(req, res) {
 
-        require('./util/access.js')(modelName, namm);
+        util_access(modelName, namm);
 
         var access = getRoleAccess(req, 'update');
         var privateAccess = hasPrivateAccess(req, 'update');

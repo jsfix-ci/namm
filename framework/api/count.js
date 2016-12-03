@@ -9,10 +9,13 @@ module.exports = function(modelName, namm){
     var model = mongoose.model(modelName);
     this[modelName] = model;
 
+    var util_access = require('./util/access');
+    var util_util = require('./util/util');
+
     return function(req, res) {
 
-        require('./util/util')(modelName, namm);
-        require('./util/access.js')(modelName, namm);
+        util_util(modelName, namm);
+        util_access(modelName, namm);
 
         var access = getRoleAccess(req, 'count');
         if(debug){ console.log(modelName + "/count Access: " + access + " [" + req.user.username + "]"); }
