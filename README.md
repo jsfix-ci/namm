@@ -2,7 +2,16 @@
 
 ### example reddit clone application: https://github.com/melnx/namm_example
 
-This framework lets you build an entire single page application driven by an advanced REST api in minutes with minimal coding.
+This framework lets you build an entire single page application driven by an advanced REST api in minutes with minimal coding. It provides:
+
+* Authentication
+* REST API
+* SPA (Single Page Application)
+  * Routing
+  * Controllers
+  * (Partial) Views
+  * Layout (+Menus)
+* Recurring Payments
 
 sample usage:
 ```javascript
