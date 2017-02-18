@@ -12,11 +12,13 @@ var debug = false;
 Schema = mongoose.Schema;
 
 var homePages = null;
+var introPages = null;
 var registrationCode = null;
 
 function setupUserModel(userModel, namm){
 
     homePages = userModel.$home;
+    introPages = userModel.$intro;
     debug = namm.debug;
 
     //$private : can see but cannot update unless you're admin
@@ -85,7 +87,7 @@ function initMailgunIfNeeded(){
     }
 }
 
-function getHomePath(user){
+function getHomePath(user, homePages){
     if(debug){
         console.log("$HOME TYPE: " + typeof homePages);
     }
@@ -290,7 +292,7 @@ function setupAuthentication(app, conf, namm) {
             if (err) { return next(err); }
             // Redirect if it succeeds
 
-            var redirectPath = getHomePath(user);
+            var redirectPath = getHomePath(user, homePages);
             return res.redirect(redirectPath);
         });
     })(req, res, next);
@@ -324,7 +326,7 @@ function setupAuthentication(app, conf, namm) {
             if (err) { return next(err); }
             // Redirect if it succeeds
 
-            var redirectPath = getHomePath(user);
+            var redirectPath = getHomePath(user, introPages);
             return res.redirect(redirectPath);
         });
     })(req, res, next);
