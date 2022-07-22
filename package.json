@@ -14,7 +14,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.14.0",
     "mailgun-js": "^0.7.12",
-    "mongoose": "^4.5.9",
+    "mongoose": "^5.13.14",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "password-hash": "^1.2.2",

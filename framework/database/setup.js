@@ -11,7 +11,10 @@ module.exports = function(namm){
     this.connectToDatabase = function connectToDatabase() {
         var config = namm.configuration;
         var mongoConn = process.env.MONGOLAB_URI || config.mongooseTestConn;
-        var actualConn = mongoose.connect(mongoConn);
+        var actualConn = /* TODO: JSFIX could not patch the breaking change:
+        BREAKING CHANGE: mongoose.connect() returns a promise, removed MongooseThenable #5796
+        Suggested fix: Only relevant if you depend on the return value being a reference to the mongoose object. In that case, you need to modify the usages of the return value to get the mongoose object from somewhere else.*/
+        mongoose.connect(mongoConn);
         console.log('MONGO: ' + mongoConn);
         console.log(actualConn.connections);
         namm.debug = !process.env.MONGOLAB_URI;
